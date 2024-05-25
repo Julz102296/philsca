@@ -20,20 +20,16 @@ import {
   useToast,
 } from '@chakra-ui/react';
 
-export default function IdModal({ isOpen, onClose, studentName }) {
+export default function IdModal({ isOpen, onClose, studentName, studentCourse, studentId, studentContactNo, studentAddress }) {
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
   const handlePrintID = () => {
-    // Set loading state to true
     setIsLoading(true);
 
-    // Simulate printing ID by adding a delay
     setTimeout(() => {
-      // Set loading state to false after delay
       setIsLoading(false);
 
-      // Show toast notification
       toast({
         title: 'ID Printed',
         description: `ID for ${studentName} has been printed successfully.`,
@@ -42,7 +38,6 @@ export default function IdModal({ isOpen, onClose, studentName }) {
         isClosable: true,
       });
 
-      // Close the modal
       onClose();
     }, 2000);
   };
@@ -51,10 +46,9 @@ export default function IdModal({ isOpen, onClose, studentName }) {
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{studentName}</ModalHeader>
+        <ModalHeader>{studentName} - Student ID: {studentId}</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          {/* Student details to print */}
           <Card maxW='sm' bg="gold" border="2px">
             <CardBody>
               <Image
@@ -65,23 +59,20 @@ export default function IdModal({ isOpen, onClose, studentName }) {
                 p="20px"
               />
               <Stack mt='2' spacing='1' align='center' justify='center' bg="purple.800" p="10px" rounded="lg">
-                <Heading size='md' color="white">John Deo Dela Cruz</Heading>
-                <Text fontSize='xs' color="white">Edsa Cor. Timog Brgy. Pinyahan Quezon City</Text>
-                <Text textAlign='center' color="white">
-                  ID No. -
-                </Text>
+                <Heading size='md' color="white">{studentName}</Heading>
+                <Text fontSize='xs' color="white">ID No. {studentId}</Text>
                 <Text fontWeight="50px" fontSize='2xl' textAlign='center' color="white">
-                  BSIT
+                  {studentCourse}
                 </Text>
-                <Text fontSize='xs' color="white">Bachelor of Science in Information and Technology</Text>
+                <Text fontSize='xs' color="white">Contact No. : {studentContactNo}</Text>
+                <Text fontSize='xs' color="white">Address: {studentAddress}</Text> {/* Display the address */}
               </Stack>
             </CardBody>
             <Divider />
             <CardFooter bg="purple.800" align='center' justify='center' p="10px">
-              <Text fontSize='xs' color="white">Contact No. : 09123456789</Text>
+              <Text fontSize='xs' color="white">Course: {studentCourse}</Text>
             </CardFooter>
           </Card>
-          {/* Student details to print */}
         </ModalBody>
         <ModalFooter>
           <ButtonGroup spacing='2'>

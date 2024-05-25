@@ -22,9 +22,14 @@ export default function StudIDList() {
     fetchData(); // Call fetchData function when component mounts
   }, []);
 
-  const handleViewClick = (student) => {
+  const handleViewClick = async (student) => {
     setSelectedStudent(student);
     setModalOpen(true);
+    // Assuming your API fetches the student's address along with other details
+    // Modify the API function to include address if it doesn't already
+    // For example: const data = await fetchAccountAPI(student._id);
+    // Then, update the selected student with the address
+    // setSelectedStudent({ ...student, address: data.address });
   };
 
   const handleCloseModal = () => {
@@ -70,6 +75,10 @@ export default function StudIDList() {
         isOpen={modalOpen}
         onClose={handleCloseModal}
         studentName={selectedStudent?.name}
+        studentCourse={selectedStudent?.course}
+        studentId={selectedStudent?._id}
+        studentContactNo={selectedStudent?.contactnumber}
+        studentAddress={selectedStudent?.address} // Pass the student's address
       />
     </>
   );
